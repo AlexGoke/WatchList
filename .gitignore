@@ -4,3 +4,4 @@ __pychche__
 .DS_Store
 .env
 *.db
+PIPENV_VENV_IN_PROJECT

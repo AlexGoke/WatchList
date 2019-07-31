@@ -73,7 +73,22 @@ class Movie(db.Model):  # 表名将会是 movie
 
 @app.route('/')    # index-索引，即主页
 def index():
+    #user = User(name = 'Alex Goke')     #直接给user赋值，但采用数据库的方式
     user = User.query.first()
     movies = Movie.query.all()
-    return render_template('index.html', user=user, movies=movies)    #render_template() 函数在调用时会识别并执行 index.html 里所有的 Jinja2 语句，返回渲染好的模板内容。
+    #return render_template('index.html', user=user, movies=movies)    #render_template() 函数在调用时会识别并执行 index.html 里所有的 Jinja2 语句，返回渲染好的模板内容。
+    return render_template('index.html', movies=movies)    #有了模板上下文函数，user可省略
+    
 
+@app.errorhandler(404)
+def page_not_found(e):
+    user = User.query.first()
+    #这个函数返回了状态码作为第二个参数，普通的视图函数之所以不用写出状态码，是因为默认会使用 200 状态码，表示成功。
+    #return render_template('404.html', user=user), 404    #返回模板 和 状态码
+    return render_template('404.html'), 404    ##有了模板上下文函数，user可省略
+    
+
+@app.context_processor    #使用 app.context_processor 装饰器注册一个模板上下文处理函数
+def inject_user():    #这个函数返回的变量（以字典键值对的形式）将会统一注入到每一个模板的上下文环境中，因此可以直接在模板(html)中使用。
+    user = User.query.first()
+    return dict(user=user)    # 需要返回字典，等同于return {'user': user}

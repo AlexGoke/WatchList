@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    {% block head %}    {# 包含 <head></head> 内容的 head 块 #}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    {# 新的 <meta> 元素，这个元素会设置页面的视口，让页面根据设备的宽度来自动缩放页面，让移动设备拥有更好的浏览体验 #}
+    <title>{{ user.name }}'s Watchlist</title>
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" type="text/css">    {# 页面的 <head> 标签内引入这个 CSS 文件 #}
+    {% endblock %}
+
+</head>
+<body>
+    <h2>
+        <img alt="Avatar" class="avatar" src="{{ url_for('static', filename='images/avatar.png') }}">
+        {{ user.name }}'s Watchlist
+    </h2>
+    
+    {# 新的页面添加了一个导航栏 #}
+    <nav>
+        <ul>
+            <li><a href="{{ url_for('index') }}">Home</a></li>
+        </ul>
+    </nav>
+
+    {% block content %}{% endblock %}    {# 用来在子模板中插入页面主体内容的 content 块 #}
+
+    <footer>
+        <small>&copy; 2018 <a href="http://helloflask.com/tutorial">HelloFlask</a></small>
+    </footer>
+</body>
+</html>
