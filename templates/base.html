@@ -2,19 +2,19 @@
 <html lang="en">
 <head>
 
-    {% block head %}    {# 包含 <head></head> 内容的 head 块 #}
+    {% block head %}    <!--包含 <head></head> 内容的 head 块-->
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">    {# 新的 <meta> 元素，这个元素会设置页面的视口，让页面根据设备的宽度来自动缩放页面，让移动设备拥有更好的浏览体验 #}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    <!--新的 <meta> 元素，这个元素会设置页面的视口，让页面根据设备的宽度来自动缩放页面，让移动设备拥有更好的浏览体验-->
     <title>{{ user.name }}'s Watchlist</title>
     <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" type="text/css">    {# 页面的 <head> 标签内引入这个 CSS 文件 #}
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" type="text/css">    <!--页面的 <head> 标签内引入这个 CSS 文件 --> 
     {% endblock %}
 
 </head>
 <body>
     
     <!-- 获取提示消息并显示-->
-    {% for message in get_flashed_messages() %}
+    {% for message in get_flashed_messages() %}    <!-- flash消息来自于 app.py 中-->
     <div class="alert">{{ message }}</div>
     {% endfor %}
 
@@ -27,16 +27,16 @@
     <nav>
         <ul>
             <li><a href="{{ url_for('index') }}">Home</a></li>
-            {% if current_user.is_authenticated %}
+            {% if current_user.is_authenticated %}    <!--只有登陆用户才可以看到 settings, Logout -->
                 <li><a href="{{ url_for('settings') }}">Settings</a></li>
                 <li><a href="{{ url_for('logout') }}">Logout</a></li>
-            {% else %}
+            {% else %}    <!--非登陆用户可以看到 Login -->
                 <li><a href="{{ url_for('login') }}">Login</a></li>
             {% endif %}
         </ul>
     </nav>
 
-    {% block content %}{% endblock %}    {# 用来在子模板中插入页面主体内容的 content 块 #}
+    {% block content %}{% endblock %}    <!--用来在子模板中插入页面主体内容的 content 块-->
 
     <footer>
         <small>&copy; 2018 <a href="http://helloflask.com/tutorial">HelloFlask</a></small>

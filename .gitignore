@@ -5,3 +5,5 @@ __pychche__
 .env
 *.db
 PIPENV_VENV_IN_PROJECT
+htmlcov/
+.coverage

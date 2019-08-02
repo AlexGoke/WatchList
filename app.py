@@ -47,7 +47,7 @@ def initdb(drop):
     if drop:
         db.drop_all()
     db.create_all()
-    click.echo("Initialize database.")    #输出提示信息
+    click.echo("Initialized database.")    #输出提示信息
 
 # 自定义命令 —— 数据库初始化数据
 @app.cli.command()    #创建自定义命令 froge. 执行该命令即可将虚拟数据添加到数据库里。
@@ -122,6 +122,7 @@ class Movie(db.Model):   # 表名将会是movie
     year = db.Column(db.String(4))  # 电影年份
 
 
+# 主页视图
 # 这个视图函数处理哪种方法类型的请求。默认只接受 GET 请求，上面的写法表示同时接受 GET 和 POST 请求。
 @app.route('/', methods=['GET', 'POST'])    # index-索引，即主页
 def index():
@@ -134,7 +135,7 @@ def index():
         year = request.form.get('year')
         #验证数据是否有效
         if not title or not year or len(title) > 60 or len(year) > 4:
-            flash("Invalid inpur.")    # 显示错误提示
+            flash("Invalid input.")    # 显示错误提示
             return redirect(url_for('index'))    # 重定向回主页
         #保存表单数据到数据库
         movid = Movie(title=title, year=year)    # 创建记录
@@ -214,10 +215,10 @@ def login():
         # 验证用户名和密码是否一致
         if username == user.username and user.validate_password(password):
             login_user(user)    # 登入用户
-            flash('Login Success.')
+            flash('Login success.')
             return redirect(url_for('index'))    # 重定向到主页
         
-        flash('Invalid username or password')    # 如果验证失败，显示错误消息
+        flash('Invalid username or password.')    # 如果验证失败，显示错误消息
         return redirect(url_for('login'))     # 重定向回登录页面
     return render_template('login.html')
 
