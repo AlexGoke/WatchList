@@ -1,7 +1,11 @@
 import unittest    
 
-from app import app, db, User, Movie
-from app import forge, initdb    # 导入命令函数（都是自定义的命令）
+#from app import app, db, User, Movie
+#from app import forge, initdb    # 导入命令函数（都是自定义的命令）
+#因为代码经过组织后，文件路径改变了，需要更新导入语句
+from watchlist import app, db
+from watchlist.models import User, Movie
+from watchlist.commands import forge, initdb
 
 class WatchlistTestCase(unittest.TestCase):    #测试用例
     
